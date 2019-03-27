@@ -33,7 +33,7 @@ exports.log_in_user = function(req,res){
 };
 
 exports.get_user = function(req,res){
-    User.getRole(req.params.id, (err,user)=>{
+    User.getUser(req.params.id, (err,user)=>{
         if(err){
             res.status(401).send(err);
         }

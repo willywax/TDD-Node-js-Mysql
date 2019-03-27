@@ -20,7 +20,8 @@
       "**/node_modules/**",
       "**/test/**",
       "**/coverage/**",
-      "**/sample_data.js"
+      "**/sample_data.js",
+      "**/index.js"
     ],
     "all": true
   },
