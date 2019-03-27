@@ -28,4 +28,42 @@ It required the learner to use Node.js , Mysql to create a simple TDD OOP Progra
 
 
 ### Configured End Points
+**CREATE USER** POST http://localhost:3000/users  
+Request Body Format with role 1 = Normal User 2 = Moderator 3 = Admin
 
+        {
+          "name" : "Test Name",
+          "role" : 1
+        }
+      
+ **LOG IN USER** POST http://localhost:3000/users/login/{userId}
+ **GET USER** GET http://localhost:3000/users/{userId}
+ 
+ **CREATE COMMENT** POST http://localhost:3000/comments
+         {
+            "comment" : "This is a sample Comment",
+            "author" : 1
+         }
+         
+ **UPDATE COMMENT** PUT http://localhost:3000/comments/{commentId}
+         {
+            "comment" : "This is a sample Comment",
+            "updated_by" : 1  //Pass User ID who is updating the comment
+         }
+
+ **DELETE COMMENT** DELETE http://localhost:3000/comments/{commentId}
+         {
+            "updated_by" : 1
+         }
+        
+ **GET COMMENTS BY USER** POST http://localhost:3000/comments/user/{userId}
+   
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
