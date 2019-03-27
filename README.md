@@ -19,7 +19,7 @@ It required the learner to use Node.js , Mysql to create a simple TDD OOP Progra
 #### Install Instractions 
 1. Download or Clone the project
 2. Head to the db.js in Models folder and update the db connnection details otherwise you will run into errors
-3. Run npm install --save 
+3. Run 'npm run install --save'
 4. To configure database and insert dummy record. node sample_data.js
 5. To run test npm run test
 6. To run the node app you can use nodemon index.js or node index.js 
