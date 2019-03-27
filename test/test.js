@@ -125,7 +125,7 @@ describe('Testing Comment API',function(){
         "updated_by" : 3
     }
     it('should delete a comment from a list ', (done)=>{
-        requester.delete('/comments/3').send(delete_comment3).end(
+        requester.delete('/comments/5').send(delete_comment3).end(
             (err,res)=>{
                 expect(res).to.have.status(200);
                 done();
