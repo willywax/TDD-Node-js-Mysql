@@ -4,8 +4,9 @@ services:
   -mysql
 
 before_install:
+  - mysql -u root --password=""
   npm install --save
-  node sample_data.js
+  npm run data
 
 after_install:
   npm run test
