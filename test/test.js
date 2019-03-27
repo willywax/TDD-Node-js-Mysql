@@ -122,7 +122,7 @@ describe('Testing Comment API',function(){
     const update_comment2 = {
         "comment" : "New Updated Comment"
     }
-    it('should update a task using id in Controller ', (done)=>{
+    it('should update a comment using id in Controller ', (done)=>{
         requester.put('/comments/1').send(update_comment2).end(
             (err,res)=>{
                 expect(res).to.have.status(200);

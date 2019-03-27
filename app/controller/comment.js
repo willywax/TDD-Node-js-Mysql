@@ -24,7 +24,7 @@ exports.create_a_comment = (req,res)=>{
 
 //Updates a Comment
 exports.update_a_comment = function(req,res){
-
+    console.log(req);
     Comment.editById( req.params.id, req.body, (err,comment)=>{
         if(err){
             res.status(404).send(err);
@@ -37,6 +37,7 @@ exports.update_a_comment = function(req,res){
 };
 
 exports.get_comment_by_user = function(req,res){
+    console.log(req.method);
     Comment.getCommentByUser(req.params.userId, function(err,comment){
         if(err){
             res.send(err);

@@ -36,13 +36,25 @@ User.logInUser = (id, result)=>{
 }
 
 //Get User Role 
-User.getRole = (user,result)=>{
-    sql.query("SELECT role from USERS where id = ?",[user],(err,res)=>{
+User.getRole = (user_id,result)=>{
+    sql.query("SELECT role from USERS where id = ?",[user_id],(err,res)=>{
         if(err){
             result(err,null);
         }else {
            // console.log(res);
             result(null,res);
+        }
+    });
+}
+
+//Get User  
+User.getUser = (user_id,result)=>{
+    sql.query("SELECT * from USERS where id = ?",[user_id],(err,res)=>{
+        if(err){
+            result(err,null);
+        }else {
+           // console.log(res); Because its array so we get first element
+            result(null,res[0]);
         }
     });
 }

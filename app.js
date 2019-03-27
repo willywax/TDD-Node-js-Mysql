@@ -8,9 +8,6 @@ const app = express();
 const commentRouter = require('./app/routes/comment');
 const userRouter = require('./app/routes/users');
 
-
-
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -20,12 +17,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-//app.use('/images', express.static(path.join(__dirname, 'images')));
-
-
 app.use('/comments',commentRouter);
 app.use('/users',userRouter);
-//app.use('/api/auth', userRouter);
-
 
 module.exports = app;

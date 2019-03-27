@@ -1,4 +1,5 @@
 var sql = require('./db');
+const User = require('./user');
 
 var Comment = function(comment) {
     this.comment = comment.comment;
@@ -59,15 +60,37 @@ Comment.editById = (id,comment, result)=>{
 Comment.remove = function(id,result){
     sql.query("DELETE FROM comments WHERE id = ? ",id, (err,res)=>{
         if(err) {
-            //console.log("error: ", err);
-            result(null, err);
-         
+            result(err, null);
         }
         else{
          result(null, res);
-
         } 
     });
 }
+
+
+//Gets the role of the author
+Comment.getAuthor = function(id, result){
+    sql.query("Select author from comments where id = ?",[id],(err,res)=>{
+        if(err) {
+            result(err, null);
+        }
+        else{
+        let author_id = res[0].author;
+        //Get the Author ID
+        //result(null,res);
+         User.getUser(author_id, (err,user)=>{
+            if(err) {
+                result(err, null);
+            }
+            else{
+                //let user = users[0];
+             result(null, user);
+            } 
+        });    
+        } 
+    });
+}
+
 
 module.exports = Comment;
