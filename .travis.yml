@@ -4,8 +4,6 @@ services:
   -mysql
 
 before_install:
-  npm install --save
-  npm run data
 
 after_install:
   npm run test
