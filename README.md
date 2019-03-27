@@ -9,12 +9,12 @@ It required the learner to use Node.js , Mysql to create a simple TDD OOP Progra
 5. Have a test coverage of atleast 65% 
 
 #### Design Approach
-1. Poject Structure
-  1.1 Models : Contains the main Classes and SQL Queries. (User, Comment, DB)
-  1.2 Controllers: Contains the logic to interact with the models. ( UserController, CommentController)
-  1.3 Routers: Redirection of requests. (UserRouter, CommentRouter)
-  1.4 Middleware: Checks for access if a user is about to edit or update a comment. (Access)
-  1.5 Tests: Has test.js which contains all the tests
+1. Poject Structure<br>
+  1.1  Models : Contains the main Classes and SQL Queries. (User, Comment, DB)<br>
+  1.2  Controllers: Contains the logic to interact with the models. ( UserController, CommentController)<br>
+  1.3  Routers: Redirection of requests. (UserRouter, CommentRouter)<br>
+  1.4  Middleware: Checks for access if a user is about to edit or update a comment. (Access)<br>
+  1.5  Tests: Has test.js which contains all the tests<br>
  
 #### Install Instractions 
 1. Download or Clone the project
