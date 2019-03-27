@@ -1,10 +1,2 @@
 language: node_js
 
-services:
-  -mysql
-
-before_install:
-
-after_install:
-  npm run test
-  
