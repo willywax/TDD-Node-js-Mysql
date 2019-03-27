@@ -1,4 +1,8 @@
 # TDD-Node-js-Mysql
+
+###Code Coverage 
+[![Coverage Status](https://coveralls.io/repos/github/willywax/TDD-Node-js-Mysql/badge.svg?branch=master)](https://coveralls.io/github/willywax/TDD-Node-js-Mysql?branch=master)
+
 ### Project Summary
 This project is part of ALC Capstone Challenge 3.
 It required the learner to use Node.js , Mysql to create a simple TDD OOP Program that could do the following
