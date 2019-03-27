@@ -5,7 +5,6 @@ services:
 
 before_install:
   npm install --save
-  npm install -dev--save
   node sample_data.js
 
 after_install:
