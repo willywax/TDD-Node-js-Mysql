@@ -13,21 +13,30 @@ exports.create_user = (req,res)=>{
                 message: 'Please provide user details'
             });
     }else {
-        User.createUser(new_user), (err,comment)=>{
+        User.createUser(new_user, (err,user)=>{
             if(err){
-                res.error(err);
+                res.status(401).send(err);
             }
-            res.status(201).json(comment);
-        };
+            res.status(201).json(user);
+        });
     }
 }
 
 //Log In a User
 exports.log_in_user = function(req,res){
-    User.logInUser(req.body , (err,user)=>{
+    User.logInUser(req.params.id , (err,user)=>{
         if(err){
             res.status(401).send(err);
         }
-        res.status(200).json({user});
+        res.status(200).json(user);
     });
 };
+
+exports.get_user = function(req,res){
+    User.getRole(req.params.id, (err,user)=>{
+        if(err){
+            res.status(401).send(err);
+        }
+        res.status(200).json(user)
+    });
+}

@@ -3,6 +3,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 const assert = chai.assert;
+const should = chai.should;
 
 chai.use(chaiHttp);
 
@@ -12,52 +13,86 @@ const url = 'http://localhost:3000';
 const index = require('../index');
 const app = require('../app');
 const db = require('../app/model/db');
+const Comment = require('../app/model/comment');
+const User = require('../app/model/user');
 
-const TaskModal = require('../app/model/appModel');
-const appController = require('../app/controller/appController');
-const appRouter = require('../app/routes/appRoutes');
+const CommentRouter = require('../app/routes/comment');
+const UserRouter = require('../app/routes/users');
+
+const UserController = require('../app/controller/user');
+const commentController = require('../app/controller/comment');
 
 
+describe('Testing Comment API',function(){
+    const new_comment = {
+        "comment" : "New Comment",
+        "author": 1,
+        "created_at": new Date()
+    }
 
-describe('Testing Tasks API',function(){
-    it('should get data records from server',(done)=>{
-        requester.get('/tasks').end(
-            (err,res)=>{
-                expect(res).to.have.status(200); 
-                done();
-            }
-        )
+    const new_comment2 = {
+        "comment" : "New Comment",
+        "created_at": new Date()
+    }
+    
+
+    it('Insert a comment to a db',(done)=>{
+        Comment.createComment(new_comment, (err,res)=>{
+            expect(res.affectedRows).is.greaterThan(0);
+            done();
+        });
     });
 
-    const task3 =  {
-        "id": 3,
-        "task": "Fix bugs",
-        "status": 1,
-        "created_at": "2016-04-10T20:50:40.000Z"
-    };
-    it('should get a specific record from server',(done)=>{
-        requester.get('/tasks/3').end(
-            (err,res)=>{ 
-                expect(res).to.have.status(200); 
-                expect(res.body).to.deep.include(task3);
-                done();
-            }
-        )
+    it('Throw err when insert into Comment table',(done)=>{
+        Comment.createComment(new_comment2, (err,res)=>{
+            expect(function() { throw err })
+            .to.throw(  Error, "ER_NO_DEFAULT_FOR_FIELD: Field 'author' doesn't have a default value");
+            done();
+        });
     });
 
-    it('should return empty array if not found',(done)=>{
-        requester.get('/tasks/323432').end(
-            (err,res)=>{ 
-                expect(res).to.have.status(200); 
-                assert(res.body.length == 0, 'No data in array');
-                done();
-            }
-        )
+    it('Get Comments By User Id',(done)=>{
+        Comment.getCommentByUser(1, (err,res)=>{
+            expect(res.length).is.greaterThan(0);
+            done();
+        });
     });
 
-    const newTask1 = { "task": 'New Input', "status": 2};
-    it('should add a new task to the list ', (done)=>{
-        requester.post('/tasks').send(newTask1).end(
+    it('Returns None if User Id has nothing',(done)=>{
+        Comment.getCommentByUser('qeqwe', (err,res)=>{
+            //console.log(err);
+            done(err);
+        });
+    });
+
+    const update_comment = {
+        "comment" : "New Updated Comment 95"
+    }
+    it('Edit a Comment ',(done)=>{
+        Comment.editById(95, update_comment, (err,res)=>{
+            //console.log(err);
+            expect(res.affectedRows).is.greaterThan(0);
+            done();
+            
+        });
+    });
+
+    it(' Deleting a Comment',(done)=>{
+        Comment.remove(100, (err,res)=>{
+            expect(res.affectedRows).is.greaterThan(0);
+            done();
+        });
+    });
+
+
+    //========== Comment Router & Comment Controller ==================//
+    const new_comment3 = {
+        "comment" : "New Comment 13",
+        "author": 1,
+    }
+
+    it('should add a new task to the list via controller', (done)=>{
+        requester.post('/comments/').send(new_comment3).end(
             (err,res)=>{
                 expect(res).to.have.status(201);
                 done();
@@ -65,18 +100,18 @@ describe('Testing Tasks API',function(){
         )
     });
 
-    const newTask2 = { "status": 2};
-    it('should return 404 if no task in request', (done)=>{
-        requester.post('/tasks').send(newTask2).end(
-            (err,res)=>{
-                expect(res).to.have.status(404);
+    it('should get comments by author',(done)=>{
+        requester.get('/comments/user/1').end(
+            (err,res)=>{ 
+                expect(res).to.have.status(200); 
+                //expect(res.body).to.deep.include(task3);
                 done();
             }
         )
     });
 
-    it('should delete a task from a list ', (done)=>{
-        requester.delete('/tasks/1').end(
+    it('should delete a comment from a list ', (done)=>{
+        requester.delete('/comments/3').end(
             (err,res)=>{
                 expect(res).to.have.status(200);
                 done();
@@ -84,9 +119,11 @@ describe('Testing Tasks API',function(){
         )
     });   
 
-    const newTask4 = { "status": 2};
-    it('should update a task using id ', (done)=>{
-        requester.put('/tasks/6').send(newTask4).end(
+    const update_comment2 = {
+        "comment" : "New Updated Comment"
+    }
+    it('should update a task using id in Controller ', (done)=>{
+        requester.put('/comments/1').send(update_comment2).end(
             (err,res)=>{
                 expect(res).to.have.status(200);
                 //expect(res.body).to.deep.include(task3);
@@ -94,7 +131,77 @@ describe('Testing Tasks API',function(){
             }
         )
     });
-    
+
+
+    // =============================================================== USER TESTS ==========================================================//
+    const new_user = {
+        "name" : "William",
+        "role": 1
+    }
+
+    it('Insert a User to a db',(done)=>{
+        User.createUser(new_user, (err,res)=>{
+            expect(res.affectedRows).is.greaterThan(0);
+            done();
+        });
+    });
+
+    it('Get role of a User',(done)=>{
+        User.getRole(2,(err,res)=>{
+            
+            //Returns an array
+            expect(res).is.deep.equals([{role: 2}]);
+            done();
+        });
+    });
+
+    it('Updates logged_in when a user Logs In',(done)=>{
+        User.logInUser(2, (err,res)=>{
+            
+            //console.log(res);
+            expect(res.affectedRows).is.greaterThan(0);
+            done();
+            //expect(res).is.deep.equal()
+        })
+    });
+
+
+
+    //========== Testing User Controller ===/
+    const new_user2 = {
+        "name" : "Eze",
+        "role": 2
+    }
+
+    it('should add a new user to the list via controller', (done)=>{
+        requester.post('/users/').send(new_user2).end(
+            (err,res)=>{
+                expect(res).to.have.status(201);
+                done();
+            }
+        )
+    });
+
+    const id = 2;
+    it('Gets the User using Controller',(done)=>{
+        requester.get('/users/'+id).end(
+            (err,res)=>{
+                expect(res).to.have.status(200); 
+                //expect(res.body).to.deep.include(task3);
+                done();
+            }
+        );
+    });
+
+    it('Logs in User from Controller',(done)=>{
+        requester.post('/users/login/'+id).end(
+            (err,res)=>{
+                expect(res).to.have.status(200);
+                done();
+            }
+        )
+    });
+
 
 });
 

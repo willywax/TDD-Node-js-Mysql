@@ -24,6 +24,7 @@ Comment.createComment = (newComment, result)=>{
 };
 
 
+
 //Gets comment by User
 Comment.getCommentByUser = (userId, result)=>{
     sql.query('SELECT * FROM `comments` WHERE `author` = ?', [userId], (err,res)=>{
@@ -44,7 +45,7 @@ Comment.getCommentByUser = (userId, result)=>{
 Comment.editById = (id,comment, result)=>{
     sql.query("UPDATE comments SET comment = ? WHERE id = ?", [comment.comment,id], (err,res)=>{
         if(err) {
-            console.log("error: ", err);
+            //console.log("error: ", err);
             result(null, err);
     
         }else {
@@ -58,7 +59,7 @@ Comment.editById = (id,comment, result)=>{
 Comment.remove = function(id,result){
     sql.query("DELETE FROM comments WHERE id = ? ",id, (err,res)=>{
         if(err) {
-            console.log("error: ", err);
+            //console.log("error: ", err);
             result(null, err);
          
         }
