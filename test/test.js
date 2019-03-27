@@ -68,8 +68,12 @@ describe('Testing Comment API',function(){
     const update_comment = {
         "comment" : "New Updated Comment 95"
     }
+
+    /**
+     * You need to Edit the id of the comment being edited
+     */
     it('Edit a Comment ',(done)=>{
-        Comment.editById(94, update_comment, (err,res)=>{
+        Comment.editById(1, update_comment, (err,res)=>{
             //console.log(err);
             expect(res.affectedRows).is.greaterThan(0);
             done();
@@ -77,8 +81,11 @@ describe('Testing Comment API',function(){
         });
     });
 
+    /**
+     * You need to Update the id the comment to be deleted After running every npm run test
+     */
     it(' Deleting a Comment',(done)=>{
-        Comment.remove(104, (err,res)=>{
+        Comment.remove(3, (err,res)=>{
             expect(res.affectedRows).is.greaterThan(0);
             done();
         });
@@ -104,14 +111,19 @@ describe('Testing Comment API',function(){
         requester.get('/comments/user/1').end(
             (err,res)=>{ 
                 expect(res).to.have.status(200); 
-                //expect(res.body).to.deep.include(task3);
                 done();
             }
         )
     });
 
+    /**
+     * Comment Id needs to be updated so as the test to pass
+     */
+    const delete_comment3 = {
+        "updated_by" : 3
+    }
     it('should delete a comment from a list ', (done)=>{
-        requester.delete('/comments/3').end(
+        requester.delete('/comments/2').send(delete_comment3).end(
             (err,res)=>{
                 expect(res).to.have.status(200);
                 done();
@@ -120,7 +132,8 @@ describe('Testing Comment API',function(){
     });   
 
     const update_comment2 = {
-        "comment" : "New Updated Comment"
+        "comment" : "New Updated Comment",
+        "updated_by" : 3
     }
     it('should update a comment using id in Controller ', (done)=>{
         requester.put('/comments/1').send(update_comment2).end(
@@ -146,6 +159,9 @@ describe('Testing Comment API',function(){
         });
     });
 
+    /**
+     * Will Fail if the db has user with Id 2 
+     */
     it('Get role of a User',(done)=>{
         User.getRole(2,(err,res)=>{
             
