@@ -69,7 +69,7 @@ describe('Testing Comment API',function(){
         "comment" : "New Updated Comment 95"
     }
     it('Edit a Comment ',(done)=>{
-        Comment.editById(95, update_comment, (err,res)=>{
+        Comment.editById(94, update_comment, (err,res)=>{
             //console.log(err);
             expect(res.affectedRows).is.greaterThan(0);
             done();
@@ -78,7 +78,7 @@ describe('Testing Comment API',function(){
     });
 
     it(' Deleting a Comment',(done)=>{
-        Comment.remove(100, (err,res)=>{
+        Comment.remove(104, (err,res)=>{
             expect(res.affectedRows).is.greaterThan(0);
             done();
         });

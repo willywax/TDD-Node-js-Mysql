@@ -4,7 +4,7 @@ const app = express();
 
 
 //Routers
-const taskRouter = require('./app/routes/appRoutes');
+
 const commentRouter = require('./app/routes/comment');
 const userRouter = require('./app/routes/users');
 
@@ -23,7 +23,6 @@ app.use(bodyParser.json());
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
-app.use('/tasks', taskRouter);
 app.use('/comments',commentRouter);
 app.use('/users',userRouter);
 //app.use('/api/auth', userRouter);

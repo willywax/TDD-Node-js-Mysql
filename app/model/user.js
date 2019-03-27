@@ -7,17 +7,6 @@ var User = function(user) {
 
 };
 
-//Get User
-User.get_user = (id, result)=>{
-    sql.query("SELECT * from user where id = ?",[id], (err,res)=>{
-        if(err){
-            result(err,null);
-        }
-        else {
-            result(null, res);
-        }
-    });
-}
 
 //Creates a User
 User.createUser = (newUser,result)=>{
