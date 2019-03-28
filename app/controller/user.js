@@ -4,7 +4,7 @@ var User = require('../model/user')
 exports.create_user = (req, res) => {
   var new_user = new User(req.body)
 
-  console.log(new_user)
+  // console.log(new_user)
   if (!new_user.name || !new_user.role) {
     res.status(404).json({
       error: true,

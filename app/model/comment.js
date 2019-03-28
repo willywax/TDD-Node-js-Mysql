@@ -47,7 +47,7 @@ Comment.editById = (id, comment, result) => {
     (err, res) => {
       if (err) {
         // console.log("error: ", err);
-        result(null, err)
+        result(err, null)
       } else {
         result(null, res)
       }

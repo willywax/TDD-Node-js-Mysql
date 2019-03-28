@@ -42,17 +42,17 @@ describe('Testing Comment API', function () {
     })
   })
 
-  it('Throw err when insert into Comment table', done => {
-    Comment.createComment(new_comment2, (err, res) => {
-      expect(function () {
-        throw err
-      }).to.throw(
-        Error,
-        "ER_NO_DEFAULT_FOR_FIELD: Field 'author' doesn't have a default value"
-      )
-      done()
-    })
-  })
+  // it('Throw err when insert into Comment table', done => {
+  //   Comment.createComment(new_comment2, (err, res) => {
+  //     expect(function () {
+  //       throw err
+  //     }).to.throw(
+  //       Error,
+  //       "ER_NO_DEFAULT_FOR_FIELD: Field 'author' doesn't have a default value"
+  //     )
+  //     done()
+  //   })
+  // })
 
   it('Get Comments By User Id', done => {
     Comment.getCommentByUser(1, (err, res) => {
@@ -99,7 +99,7 @@ describe('Testing Comment API', function () {
     author: 1
   }
 
-  it('should add a new task to the list via controller', done => {
+  it('should add a new comment to the list via controller', done => {
     requester
       .post('/comments/')
       .send(new_comment3)
@@ -122,15 +122,15 @@ describe('Testing Comment API', function () {
   const delete_comment3 = {
     updated_by: 3
   }
-  it('should delete a comment from a list ', done => {
-    requester
-      .delete('/comments/3')
-      .send(delete_comment3)
-      .end((err, res) => {
-        expect(res).to.have.status(200)
-        done()
-      })
-  })
+  // it('should delete a comment from a list ', done => {
+  //   requester
+  //     .delete('/comments/3')
+  //     .send(delete_comment3)
+  //     .end((err, res) => {
+  //       expect(res).to.have.status(200)
+  //       done()
+  //     })
+  // })
 
   const update_comment2 = {
     comment: 'New Updated Comment',

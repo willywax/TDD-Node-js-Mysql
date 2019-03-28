@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.59% </span>
+        <span class="strong">64.71% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>12/17</span>
+        <span class='fraction'>11/17</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">42.86% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>7/14</span>
+        <span class='fraction'>6/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">70.59% </span>
+        <span class="strong">64.71% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>12/17</span>
+        <span class='fraction'>11/17</span>
       </div>
     </div>
     <p class="quiet">
@@ -82,27 +82,26 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -119,51 +118,49 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const User = require('../model/user');
-const Comment = require('../model/comment');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const User = require('../model/user')
+const Comment = require('../model/comment')
 &nbsp;
-module.exports = (req,res,next)=&gt;{
-    let method = req.method; //Getting Request Method
-    Comment.getAuthor(req.params.id, (err,author)=&gt;{
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(err){
+module.exports = (req, res, next) =&gt; {
+  let method = req.method // Getting Request Method
+  Comment.getAuthor(req.params.id, (err, author) =&gt; {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
+<span class="cstat-no" title="statement not covered" >      res.status(401).json({</span>
+        error: 'Error Occured' // new Error('Error Getting User!')
+      })
+    } else {
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (req.body.updated_by === author.id) {
+<span class="cstat-no" title="statement not covered" >        next() </span>// The user can update his / her own comment
+      } else {
+        User.getUser(req.body.updated_by, (err, user) =&gt; {
+          <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >            res.status(401).json({</span>
-                error: 'Error Occured' //new Error('Error Getting User!')
-              });
-        }else{
-            if(req.body.updated_by === author.id){
-                next(); //The user can update his / her own comment
-            }else {
-                User.getUser(req.body.updated_by, (err,user)=&gt;{
-                    <span class="missing-if-branch" title="if path not taken" >I</span>if(err){
-<span class="cstat-no" title="statement not covered" >                        res.status(401).json({</span>
-                            error: 'Invalid User' //new Error('Error Getting User!')
-                          });
-                    }else {
-                        //Checking if it's Updating or Deleting
-                        <span class="missing-if-branch" title="else path not taken" >E</span>if(method === 'PUT' &amp;&amp; user.role &gt;2){
-                            next(); //Allowing Administrator to Update Any Comment
-                        }else <span class="cstat-no" title="statement not covered" >if(method === 'DELETE' &amp;&amp; user.role &gt; 1){</span>
-<span class="cstat-no" title="statement not covered" >                            next(); </span>//Allowing Moderator or Administrator To Delete a Comment
-                        }else {
-<span class="cstat-no" title="statement not covered" >                            res.status(401).json({</span>
-                                error: 'Access Denied' //new Error('Access Denied!')
-                              });
-                        }
-                    }
-                })
+              error: 'Invalid User' // new Error('Error Getting User!')
+            })
+          } else {
+            // Checking if it's Updating or Deleting
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (method === 'PUT' &amp;&amp; user.role &gt; 2) {
+              next() // Allowing Administrator to Update Any Comment
+            } else <span class="cstat-no" title="statement not covered" >if (method === 'DELETE' &amp;&amp; user.role &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >              next() </span>// Allowing Moderator or Administrator To Delete a Comment
+            } else {
+<span class="cstat-no" title="statement not covered" >              res.status(401).json({</span>
+                error: 'Access Denied' // new Error('Access Denied!')
+              })
             }
-        }
-       
-    })
-    
-}</pre></td></tr>
+          }
+        })
+      }
+    }
+  })
+}
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Mar 27 2019 16:43:41 GMT+0300 (East Africa Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 28 2019 15:49:40 GMT+0300 (East Africa Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
