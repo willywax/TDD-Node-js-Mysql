@@ -58,6 +58,7 @@ try {
   connection.query(comment3)
 
   connection.end()
+  //connection.end()
   console.log('All data and tables created Successfully')
 } catch {
   console.log('Error Occured')
