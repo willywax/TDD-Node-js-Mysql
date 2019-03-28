@@ -1,4 +1,3 @@
-let mysql  = require('mysql');
 let connection = require('./app/model/db');
 
 //let connection = mysql.createConnection(config);
