@@ -7,8 +7,11 @@
     "start": "node index.js",
     "data": "node sample_data.js",
     "test": "mocha ./test/test.js --timeout 10000 --exit",
+    "cover" : "istanbul cover _mocha",
+    "test:coverage": "mocha ./test/test.js --timeout 10000 --exit",
     "_comment": "Note: --exit in the test element is to force the test program to exit after finishing in case we use done()",
-    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "nyc": {
     "_comment": "Purpose of this part: to do code coverage within Mocha/Chai using Istanbul",
@@ -26,7 +29,7 @@
     ],
     "all": true
   },
-  "author": "",
+  "author": "willywax",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
