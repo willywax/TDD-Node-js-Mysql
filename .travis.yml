@@ -1,2 +1,11 @@
 language: node_js
 
+services:
+  mysql
+
+before_install:
+  npm run data
+  npm install --save 
+
+after_install:
+  npm test
