@@ -49,9 +49,12 @@ exports.get_comment_by_user = function(req,res){
 //Deletes a Comment
 exports.delete_a_comment =  function(req,res){
     Comment.remove( req.params.id, function(err, comment) {
-        if (err)
-          res.send(err);
-        res.status(200).json({ message: 'Comment successfully deleted' });
+        if(err){
+            res.status(404).send(err);
+        }
+        res.status(200).json({ 
+            message: 'Comment successfully deleted' 
+        });
     });
 };
 
