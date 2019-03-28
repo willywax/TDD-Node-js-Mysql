@@ -28,7 +28,7 @@ exports.update_a_comment = function (req, res) {
       res.status(404).send(err)
     }
     res.status(200).json({
-      affectedRows: comment.affectedRows
+      message: 'Comment successfully updated'
     })
   })
 }
