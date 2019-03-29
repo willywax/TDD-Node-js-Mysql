@@ -58,4 +58,14 @@ User.getUser = (user_id, result) => {
   })
 }
 
+// Checks if the db is empty
+User.getData = result => {
+  sql.query('SELECT * from users', (err, res) => {
+    if (err) {
+      result(err, null)
+    } else {
+      result(null, res)
+    }
+  })
+}
 module.exports = User
