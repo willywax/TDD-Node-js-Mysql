@@ -75,12 +75,12 @@ describe('Testing Comment API', done => {
   })
 
   const id = 2
-  // it('Gets the User using Controller', done => {
-  //   requester.get('/users/1').end((err, res) => {
-  //     expect(res).to.have.status(200)
-  //     done()
-  //   })
-  // })
+  it('Gets the User using Controller', done => {
+    requester.get('/users/1').end((err, res) => {
+      expect(res).to.have.status(200)
+      done()
+    })
+  })
 
   it('Logs in User from Controller', done => {
     requester.post('/users/login/' + id).end((err, res) => {

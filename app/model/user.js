@@ -34,18 +34,6 @@ User.logInUser = (id, result) => {
   )
 }
 
-// Get User Role
-User.getRole = (userId, result) => {
-  sql.query('SELECT role from USERS where id = ?', [user_id], (err, res) => {
-    if (err) {
-      result(err, null)
-    } else {
-      // console.log(res);
-      result(null, res)
-    }
-  })
-}
-
 // Get User
 User.getUser = (userId, result) => {
   sql.query('SELECT * FROM `users` WHERE `id` = ?', [userId], (err, res) => {
@@ -59,14 +47,4 @@ User.getUser = (userId, result) => {
   })
 }
 
-// Checks if the db is empty
-User.getData = result => {
-  sql.query('SELECT * from users', (err, res) => {
-    if (err) {
-      result(err, null)
-    } else {
-      result(null, res)
-    }
-  })
-}
 module.exports = User
