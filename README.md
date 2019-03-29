@@ -1,6 +1,6 @@
 # TDD-Node-js-Mysql
 
-[![Coverage Status](https://coveralls.io/repos/github/willywax/TDD-Node-js-Mysql/badge.svg?branch=master)](https://coveralls.io/github/willywax/TDD-Node-js-Mysql?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/willywax/TDD-Node-js-Mysql/badge.svg)](https://coveralls.io/github/willywax/TDD-Node-js-Mysql)
 [![Build Status](https://travis-ci.org/willywax/TDD-Node-js-Mysql.svg?branch=master)](https://travis-ci.org/willywax/TDD-Node-js-Mysql)
 
 ### Project Summary
