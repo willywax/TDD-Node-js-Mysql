@@ -49,11 +49,12 @@ describe('Testing Comment API', done => {
    */
   it('Get role of a User', done => {
     User.getUser(1, (err, res) => {
-      // Returns an array
+      setTimeout(() => {
+        console.log(res.role)
+        expect(res.role).is.equal(1)
+        done()
+      }, 5000)
       console.log(res.role)
-      // expect(res)
-      expect(res.role).is.equal(1)
-      done()
     })
   })
 
