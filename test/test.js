@@ -16,7 +16,7 @@ const Comment = require('../app/model/comment')
 const User = require('../app/model/user')
 
 const CommentRouter = require('../app/routes/comment')
-const UserRouter = require('../app/routes/users')
+const UserRouter = require('../app/routes/user')
 
 const UserController = require('../app/controller/user')
 const commentController = require('../app/controller/comment')
@@ -125,29 +125,26 @@ describe('Testing Comment API', done => {
     updated_by: 3
   }
   it('should delete a comment from a list ', done => {
+    requester.delete('/comments/4/3').end((err, res) => {
+      if (err) done(err)
+      expect(res).to.have.status(200)
+      done()
+    })
+  })
+
+  const update_comment2 = {
+    comment: 'New Updated Comment'
+  }
+  it('should update a comment using id in Controller ', done => {
     requester
-      .delete('/comments/4')
-      .send(delete_comment3)
+      .put('/comments/1/3')
+      .send(update_comment2)
       .end((err, res) => {
+        if (err) done(err)
         expect(res).to.have.status(200)
         done()
       })
   })
-
-  const update_comment2 = {
-    comment: 'New Updated Comment',
-    updated_by: 3
-  }
-  // it('should update a comment using id in Controller ', done => {
-  //   requester
-  //     .put('/comments/1')
-  //     .send(update_comment2)
-  //     .end((err, res) => {
-  //       expect(res).to.have.status(200)
-  //       // expect(res.body).to.deep.include(task3);
-  //       done()
-  //     })
-  // })
 
   // =============================================================== USER TESTS ==========================================================//
   const new_user = {
@@ -169,7 +166,7 @@ describe('Testing Comment API', done => {
     User.getRole(2, (err, res) => {
       // Returns an array
       console.log(res)
-      expect(res).is.deep.equals([{ role: 2 }])
+      expect(res).is.deep.equal([{ role: 2 }])
       done()
     })
   })
@@ -203,7 +200,6 @@ describe('Testing Comment API', done => {
   it('Gets the User using Controller', done => {
     requester.get('/users/2').end((err, res) => {
       expect(res).to.have.status(200)
-      // expect(res.body).to.deep.include(task3);
       done()
     })
   })

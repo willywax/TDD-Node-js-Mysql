@@ -5,7 +5,7 @@ const app = express()
 // Routers
 
 const commentRouter = require('./app/routes/comment')
-const userRouter = require('./app/routes/users')
+const userRouter = require('./app/routes/user')
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')

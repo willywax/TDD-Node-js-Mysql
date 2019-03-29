@@ -9,10 +9,10 @@ module.exports = (req, res, next) => {
         error: 'Error Occured' // new Error('Error Getting User!')
       })
     } else {
-      if (req.body.updated_by === author.id) {
+      if (req.params.userId === author.id) {
         next() // The user can update his / her own comment
       } else {
-        User.getUser(req.body.updated_by, (err, user) => {
+        User.getUser(req.params.userId, (err, user) => {
           if (err) {
             res.status(401).json({
               error: 'Invalid User' // new Error('Error Getting User!')
