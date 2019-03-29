@@ -131,7 +131,6 @@ describe('Testing Comment API', done => {
 
   it('Returns None if User Id has nothing', done => {
     Comment.getCommentByUser('qeqwe', (err, res) => {
-      // console.log(err);
       done()
     })
   })
