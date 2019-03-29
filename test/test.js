@@ -24,7 +24,73 @@ const commentController = require('../app/controller/comment')
 const access = require('../app/middleware/access')
 
 describe('Testing Comment API', done => {
-  // this.timeout(5000);
+  // =============================================================== USER TESTS ==========================================================//
+  const new_user = {
+    name: 'William',
+    role: 3
+  }
+
+  it('Insert a User to a db', done => {
+    User.createUser(new_user, (err, res) => {
+      expect(res.affectedRows).is.greaterThan(0)
+      done()
+    })
+  })
+
+  /**
+   * Will Fail if the db has no user with Id 2
+   */
+  it('Get role of a User', done => {
+    User.getRole(1, (err, res) => {
+      // Returns an array
+      console.log(res)
+      expect(res).is.deep.equal({ role: 2 })
+      done()
+    })
+  })
+
+  it('Updates logged_in when a user Logs In', done => {
+    User.logInUser(2, (err, res) => {
+      // console.log(res);
+      expect(res.affectedRows).is.greaterThan(0)
+      done()
+      // expect(res).is.deep.equal()
+    })
+  })
+
+  //= ========= Testing User Controller ===/
+  const new_user2 = {
+    name: 'Eze',
+    role: 2
+  }
+
+  it('should add a new user to the list via controller', done => {
+    requester
+      .post('/users/')
+      .send(new_user2)
+      .end((err, res) => {
+        expect(res).to.have.status(201)
+        done()
+      })
+  })
+
+  const id = 2
+  // it('Gets the User using Controller', done => {
+  //   requester.get('/users/1').end((err, res) => {
+  //     expect(res).to.have.status(200)
+  //     done()
+  //   })
+  // })
+
+  it('Logs in User from Controller', done => {
+    requester.post('/users/login/' + id).end((err, res) => {
+      expect(res).to.have.status(200)
+      done()
+    })
+    // done()
+  })
+
+  // done()
 
   const new_comment = {
     comment: 'New Comment',
@@ -144,72 +210,4 @@ describe('Testing Comment API', done => {
         done()
       })
   })
-
-  // =============================================================== USER TESTS ==========================================================//
-  const new_user = {
-    name: 'William',
-    role: 1
-  }
-
-  it('Insert a User to a db', done => {
-    User.createUser(new_user, (err, res) => {
-      expect(res.affectedRows).is.greaterThan(0)
-      done()
-    })
-  })
-
-  /**
-   * Will Fail if the db has no user with Id 2
-   */
-  // it('Get role of a User', done => {
-  //   User.getRole(1, (err, res) => {
-  //     // Returns an array
-  //     console.log(res)
-  //     expect(res).is.deep.equal([{ role: 2 }])
-  //     done()
-  //   })
-  // })
-
-  it('Updates logged_in when a user Logs In', done => {
-    User.logInUser(2, (err, res) => {
-      // console.log(res);
-      expect(res.affectedRows).is.greaterThan(0)
-      done()
-      // expect(res).is.deep.equal()
-    })
-  })
-
-  //= ========= Testing User Controller ===/
-  const new_user2 = {
-    name: 'Eze',
-    role: 2
-  }
-
-  it('should add a new user to the list via controller', done => {
-    requester
-      .post('/users/')
-      .send(new_user2)
-      .end((err, res) => {
-        expect(res).to.have.status(201)
-        done()
-      })
-  })
-
-  const id = 2
-  // it('Gets the User using Controller', done => {
-  //   requester.get('/users/1').end((err, res) => {
-  //     expect(res).to.have.status(200)
-  //     done()
-  //   })
-  // })
-
-  it('Logs in User from Controller', done => {
-    requester.post('/users/login/' + id).end((err, res) => {
-      expect(res).to.have.status(200)
-      done()
-    })
-    // done()
-  })
-
-  // done()
 })
