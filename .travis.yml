@@ -8,7 +8,12 @@ services:
 
 before_install:
     - npm ci 
+
+before_script:
     - yarn data
+
+script:
+    - yarn test
   
 after_success:
     - yarn coveralls
