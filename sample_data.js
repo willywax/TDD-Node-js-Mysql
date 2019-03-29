@@ -48,6 +48,9 @@ try {
   let comment3 = `INSERT INTO comments(comment,author)
                         VALUES('Third Comment',3)`
 
+  let comment4 = `INSERT INTO comments(comment,author)
+                        VALUES('Third Comment',1)`
+
   // execute the insert statment
   connection.query(user1)
   connection.query(user2)
@@ -56,6 +59,7 @@ try {
   connection.query(comment1)
   connection.query(comment2)
   connection.query(comment3)
+  connection.query(comment4)
 
   connection.end()
   //connection.end()

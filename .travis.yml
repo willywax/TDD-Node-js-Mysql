@@ -11,4 +11,4 @@ before_install:
     - npm run data
   
 after_success:
-    - yarn coverage
+    - yarn coveralls

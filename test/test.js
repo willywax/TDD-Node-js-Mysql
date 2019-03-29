@@ -88,12 +88,12 @@ describe('Testing Comment API', done => {
   /**
    * You need to Update the id the comment to be deleted After running every npm run test
    */
-  // it(' Deleting a Comment',(done)=>{
-  //     Comment.remove(3, (err,res)=>{
-  //         expect(res.affectedRows).is.greaterThan(0);
-  //         done();
-  //     });
-  // });
+  it(' Deleting a Comment', done => {
+    Comment.remove(3, (err, res) => {
+      expect(res.affectedRows).is.greaterThan(0)
+      done()
+    })
+  })
 
   //= ========= Comment Router & Comment Controller ==================//
   const new_comment3 = {
@@ -124,15 +124,15 @@ describe('Testing Comment API', done => {
   const delete_comment3 = {
     updated_by: 3
   }
-  // it('should delete a comment from a list ', done => {
-  //   requester
-  //     .delete('/comments/3')
-  //     .send(delete_comment3)
-  //     .end((err, res) => {
-  //       expect(res).to.have.status(200)
-  //       done()
-  //     })
-  // })
+  it('should delete a comment from a list ', done => {
+    requester
+      .delete('/comments/4')
+      .send(delete_comment3)
+      .end((err, res) => {
+        expect(res).to.have.status(200)
+        done()
+      })
+  })
 
   const update_comment2 = {
     comment: 'New Updated Comment',
@@ -163,16 +163,16 @@ describe('Testing Comment API', done => {
   })
 
   /**
-   * Will Fail if the db has user with Id 2
+   * Will Fail if the db has no user with Id 2
    */
-  // it('Get role of a User', done => {
-  //   User.getRole(2, (err, res) => {
-  //     // Returns an array
-  //     console.log(res);
-  //     expect(res).is.deep.equals([{ role: 2 }])
-  //     done()
-  //   })
-  // })
+  it('Get role of a User', done => {
+    User.getRole(2, (err, res) => {
+      // Returns an array
+      console.log(res)
+      expect(res).is.deep.equals([{ role: 2 }])
+      done()
+    })
+  })
 
   it('Updates logged_in when a user Logs In', done => {
     User.logInUser(2, (err, res) => {
@@ -200,13 +200,13 @@ describe('Testing Comment API', done => {
   })
 
   const id = 2
-  // it('Gets the User using Controller', done => {
-  //   requester.get('/users/' + id).end((err, res) => {
-  //     expect(res).to.have.status(200)
-  //     // expect(res.body).to.deep.include(task3);
-  //     done()
-  //   })
-  // })
+  it('Gets the User using Controller', done => {
+    requester.get('/users/2').end((err, res) => {
+      expect(res).to.have.status(200)
+      // expect(res.body).to.deep.include(task3);
+      done()
+    })
+  })
 
   it('Logs in User from Controller', done => {
     requester.post('/users/login/' + id).end((err, res) => {

@@ -10,8 +10,8 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "test:coverage": "mocha ./test/test.js --timeout 10000 --exit",
     "_comment": "Note: --exit in the test element is to force the test program to exit after finishing in case we use done()",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "nyc --reporter=lcov --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "lint": "eslint '**/*.js'",
     "lint:fix": "prettier-eslint  '**/*.js' --write"
   },
