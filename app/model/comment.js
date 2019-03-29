@@ -72,10 +72,10 @@ Comment.getAuthor = function (id, result) {
     if (err) {
       result(err, null)
     } else {
-      let author_id = res[0].author
+      let authorId = res[0].author
       // Get the Author ID
       // result(null,res);
-      User.getUser(author_id, (err, user) => {
+      User.getUser(authorId, (err, user) => {
         if (err) {
           result(err, null)
         } else {

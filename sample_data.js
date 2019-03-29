@@ -31,12 +31,12 @@ try {
 
   // inserts 3 Users to User DB
   let user1 = `INSERT INTO users(name,role)
-                   VALUES('user1',1)`
+                   VALUES('user1',3)`
 
   let user2 = `INSERT INTO users(name,role)
                     VALUES('user2',2)`
   let user3 = `INSERT INTO users(name,role)
-                    VALUES('user3',3)`
+                    VALUES('user3',1)`
 
   //Inserts 3 Comments to the Comments DB
   let comment1 = `INSERT INTO comments(comment,author)

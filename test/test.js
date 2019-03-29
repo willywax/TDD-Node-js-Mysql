@@ -38,27 +38,14 @@ describe('Testing Comment API', done => {
     })
   })
 
-  it('Checks if the db is populated', done => {
-    User.getData((err, res) => {
-      console.log(res)
-      done()
-    })
-  })
-
   /**
    * Will Fail if the db has no user with Id 2
    */
-  it('Get role of a User', done => {
-    setTimeout(() => {
-      User.getUser(1, (err, res) => {})
-    })
+  it('Get User By User Id', done => {
     User.getUser(1, (err, res) => {
-      setTimeout(() => {
-        console.log(res.role)
-        expect(res.role).is.equal(1)
-        done()
-      }, 5000)
-      console.log(res.role)
+      assert(res.role, 3)
+      // expect(res.length).is.greaterThan(0)
+      done()
     })
   })
 
@@ -202,7 +189,7 @@ describe('Testing Comment API', done => {
    */
 
   it('should delete a comment from a list ', done => {
-    requester.delete('/comments/4/4').end((err, res) => {
+    requester.delete('/comments/4/1').end((err, res) => {
       if (err) done(err)
       expect(res).to.have.status(200)
       done()
@@ -214,7 +201,7 @@ describe('Testing Comment API', done => {
   }
   it('should update a comment using id in Controller ', done => {
     requester
-      .put('/comments/1/4')
+      .put('/comments/1/1')
       .send(update_comment2)
       .end((err, res) => {
         if (err) done(err)

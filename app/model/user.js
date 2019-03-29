@@ -35,7 +35,7 @@ User.logInUser = (id, result) => {
 }
 
 // Get User Role
-User.getRole = (user_id, result) => {
+User.getRole = (userId, result) => {
   sql.query('SELECT role from USERS where id = ?', [user_id], (err, res) => {
     if (err) {
       result(err, null)
@@ -47,12 +47,13 @@ User.getRole = (user_id, result) => {
 }
 
 // Get User
-User.getUser = (user_id, result) => {
-  sql.query('SELECT * from USERS where id = ?', [user_id], (err, res) => {
+User.getUser = (userId, result) => {
+  sql.query('SELECT * FROM `users` WHERE `id` = ?', [userId], (err, res) => {
     if (err) {
+      // console.log("error: ", err);
       result(err, null)
     } else {
-      // console.log(res); Because its array so we get first element
+      // console.log(res);
       result(null, res[0])
     }
   })
