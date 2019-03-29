@@ -136,6 +136,7 @@ describe('Testing Comment API', done => {
   it('should update a comment using id in Controller ', done => {
     requester
       .put('/comments/1/3')
+      .type('form')
       .send(update_comment2)
       .end((err, res) => {
         if (err) done(err)
