@@ -47,15 +47,15 @@ describe('Testing Comment API', done => {
   /**
    * Will Fail if the db has no user with Id 2
    */
-  // it('Get role of a User', done => {
-  //   User.getRole(1, (err, res) => {
-  //     // Returns an array
-  //     console.log(res)
-  //     // expect(res)
-  //     expect(res).is.deep.equal({ role: 1 })
-  //     done()
-  //   })
-  // })
+  it('Get role of a User', done => {
+    User.getUser(1, (err, res) => {
+      // Returns an array
+      console.log(res.role)
+      // expect(res)
+      expect(res.role).is.equal(1)
+      done()
+    })
+  })
 
   // it('Updates logged_in when a user Logs In', done => {
   //   User.logInUser(2, (err, res) => {
