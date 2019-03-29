@@ -10,5 +10,6 @@ before_install:
     - npm ci 
     - npm run data
   
-after_install:
+after_success:
     - npm run coveralls
+    - npm run report:coverage

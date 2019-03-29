@@ -23,7 +23,9 @@ const commentController = require('../app/controller/comment')
 
 const access = require('../app/middleware/access')
 
-describe('Testing Comment API', function () {
+describe('Testing Comment API', done => {
+  // this.timeout(5000);
+
   const new_comment = {
     comment: 'New Comment',
     author: 1,
@@ -64,7 +66,7 @@ describe('Testing Comment API', function () {
   it('Returns None if User Id has nothing', done => {
     Comment.getCommentByUser('qeqwe', (err, res) => {
       // console.log(err);
-      done(err)
+      done()
     })
   })
 
@@ -211,5 +213,8 @@ describe('Testing Comment API', function () {
       expect(res).to.have.status(200)
       done()
     })
+    // done()
   })
+
+  // done()
 })
