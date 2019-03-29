@@ -41,7 +41,7 @@ User.getRole = (user_id, result) => {
       result(err, null)
     } else {
       // console.log(res);
-      result(null, res)
+      result(null, res[0])
     }
   })
 }
